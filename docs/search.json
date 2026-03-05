@@ -1,0 +1,296 @@
+[
+  {
+    "objectID": "W06- intro to positron.html",
+    "href": "W06- intro to positron.html",
+    "title": "W06-Reflection Essay-Introduction to Positron",
+    "section": "",
+    "text": "1 Better in Positron over RStudio\nOne thing I like about Positron compared with RStudio is that it supports multiple languages like R and Python more naturally, making it useful for broader data science work. I also like the more modern interface and improved tools for exploring datasets and navigating files.\n\n1.0.1 Positron Assistant chat (in-IDE chat panel)\n\nYou can use the Assistant to ask questions about your code, explain errors, generate/refactor code, and get “next steps” suggestions\n\n\n\n\n2 Positron AI Installed\nCurrently I do not have any additional Ai packages installed for Positron.\n\n\n3 GitHub Copilot: helpful or distracting?\nIt’s helpful\n\nDebugging support: suggests missing parentheses, pipe placement, object names.\nBoilerplate + syntax speed: quick dplyr pipelines, ggplot scaffolds, function templates.\n\n\n\n4 Github Education Application"
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html",
+    "href": "Big Query Lecture 1 -HW.html",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nLIMIT 20;\nThis query pulls a small sample (20 rows) showing:\n\nevent_date: the date the event happened\nevent_name: the type of event recorded\nThe purpose is to quickly preview what the event data looks like.\n\n\n\n\n\nSELECT event_date, event_name, user_pseudo_id\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase' LIMIT 50;\nThis query filters the dataset to only include rows where:\n\nevent_name = 'purchase'\n\nIt returns up to 50 purchase events and includes:\n\nuser_pseudo_id: an anonymous user identifier\n\nThis helps confirm purchase events exist and shows which users generated them.\n\n\n\n\nSELECT event_date, event_timestamp, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\nORDER BY event_timestamp DESC\nLIMIT 20;\nThis query:\n\nfilters to purchase events only\nsorts them from newest to oldest using ORDER BY event_timestamp DESC\nreturns the 20 most recent purchase rows\n\nThis is useful when you want the latest activity first.\n\n\n\n\nSELECT COUNT(*) AS event_count\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts how many total event rows exist in the dataset for:\n\nDecember 1, 2020 through December 31, 2020\n\nIt uses _TABLE_SUFFIX to restrict which daily tables are included.\n\n\n\n\nSELECT COUNT(*) AS purchase_events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\n    AND _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts only purchase events in December 2020 by:\n\nfiltering event_name = 'purchase'\nrestricting tables to Dec 1–Dec 31 using _TABLE_SUFFIX\nThis gives the total number of purchase rows during that month.\n\n\n\n\n\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_date\nORDER BY event_date;\nThis query summarizes events by day in December 2020:\n\nGROUP BY event_date creates one row per date\nCOUNT(*) counts the number of event rows for each date\nORDER BY event_date sorts from earliest to latest\n\nThis is a basic time-series count of all activity.\n\n\n\n\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nORDER BY events DESC\nLIMIT 15;\nThis query finds the most frequent event types in December 2020:\n\ngroups by event_name\ncounts how many rows each event type has\nsorts from most common to least common\nlimits to the top 15\nThis is useful for understanding the main behaviors being tracked.\n\n\n\n\n\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nHAVING COUNT(*) &gt;= 50000\nORDER BY events DESC;\nThis query is like Query 7, but instead of taking the top 15, it:\n\nkeeps only event types with 50,000 or more rows using HAVING COUNT(*) &gt;= 50000\n\n\n\n\n\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201207'\nGROUP BY event_date\nORDER BY event_date;\nThis query is the same idea as Query 6, but only for the first week of December:\n\nDec 1, 2020 through Dec 7, 2020\none row per day with the total event count\n\nThis is useful when you want a smaller time window to explore trends quickly."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-1",
+    "href": "Big Query Lecture 1 -HW.html#query-1",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nLIMIT 20;\nThis query pulls a small sample (20 rows) showing:\n\nevent_date: the date the event happened\nevent_name: the type of event recorded\nThe purpose is to quickly preview what the event data looks like."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-2",
+    "href": "Big Query Lecture 1 -HW.html#query-2",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, event_name, user_pseudo_id\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase' LIMIT 50;\nThis query filters the dataset to only include rows where:\n\nevent_name = 'purchase'\n\nIt returns up to 50 purchase events and includes:\n\nuser_pseudo_id: an anonymous user identifier\n\nThis helps confirm purchase events exist and shows which users generated them."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-3",
+    "href": "Big Query Lecture 1 -HW.html#query-3",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, event_timestamp, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\nORDER BY event_timestamp DESC\nLIMIT 20;\nThis query:\n\nfilters to purchase events only\nsorts them from newest to oldest using ORDER BY event_timestamp DESC\nreturns the 20 most recent purchase rows\n\nThis is useful when you want the latest activity first."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-4",
+    "href": "Big Query Lecture 1 -HW.html#query-4",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT COUNT(*) AS event_count\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts how many total event rows exist in the dataset for:\n\nDecember 1, 2020 through December 31, 2020\n\nIt uses _TABLE_SUFFIX to restrict which daily tables are included."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-5",
+    "href": "Big Query Lecture 1 -HW.html#query-5",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT COUNT(*) AS purchase_events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\n    AND _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts only purchase events in December 2020 by:\n\nfiltering event_name = 'purchase'\nrestricting tables to Dec 1–Dec 31 using _TABLE_SUFFIX\nThis gives the total number of purchase rows during that month."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-6",
+    "href": "Big Query Lecture 1 -HW.html#query-6",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_date\nORDER BY event_date;\nThis query summarizes events by day in December 2020:\n\nGROUP BY event_date creates one row per date\nCOUNT(*) counts the number of event rows for each date\nORDER BY event_date sorts from earliest to latest\n\nThis is a basic time-series count of all activity."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-7",
+    "href": "Big Query Lecture 1 -HW.html#query-7",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nORDER BY events DESC\nLIMIT 15;\nThis query finds the most frequent event types in December 2020:\n\ngroups by event_name\ncounts how many rows each event type has\nsorts from most common to least common\nlimits to the top 15\nThis is useful for understanding the main behaviors being tracked."
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-8",
+    "href": "Big Query Lecture 1 -HW.html#query-8",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nHAVING COUNT(*) &gt;= 50000\nORDER BY events DESC;\nThis query is like Query 7, but instead of taking the top 15, it:\n\nkeeps only event types with 50,000 or more rows using HAVING COUNT(*) &gt;= 50000"
+  },
+  {
+    "objectID": "Big Query Lecture 1 -HW.html#query-9",
+    "href": "Big Query Lecture 1 -HW.html#query-9",
+    "title": "LaCour, Shayah - Lecture 1 BigQuery",
+    "section": "",
+    "text": "SELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201207'\nGROUP BY event_date\nORDER BY event_date;\nThis query is the same idea as Query 6, but only for the first week of December:\n\nDec 1, 2020 through Dec 7, 2020\none row per day with the total event count\n\nThis is useful when you want a smaller time window to explore trends quickly."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html",
+    "href": "LaCour, Shayah-Milestone 4.html",
+    "title": "Milestone 4",
+    "section": "",
+    "text": "SELECT\n  PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n  event_name,\n  COUNT(*) AS events,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'             \n  AND event_name IN ('page_view', 'form_start', 'form_submit')      \n  AND (\n    LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%/crm-skills-trainings/%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%/trm-trainings/%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%find-a-training%'                                   \n  )\nGROUP BY event_dt, event_name\nORDER BY event_dt, events DESC;\n\n\n\nThis query summarizes training-related user activity on the TRI website by day, counting how many events and unique users interacted with key training pages. The results show page views, form starts, and form submissions for CRM/TRM training pages during February 2026. For example, on February 25 there were 106 page views from 16 users, but only 6 form starts and 1 form submission, indicating that many users view the page but only a small portion begin or complete the registration form."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-1-filtering-and-scoping",
+    "href": "LaCour, Shayah-Milestone 4.html#query-1-filtering-and-scoping",
+    "title": "Milestone 4",
+    "section": "",
+    "text": "SELECT\n  PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n  event_name,\n  COUNT(*) AS events,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'             \n  AND event_name IN ('page_view', 'form_start', 'form_submit')      \n  AND (\n    LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%/crm-skills-trainings/%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%/trm-trainings/%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%find-a-training%'                                   \n  )\nGROUP BY event_dt, event_name\nORDER BY event_dt, events DESC;\n\n\n\nThis query summarizes training-related user activity on the TRI website by day, counting how many events and unique users interacted with key training pages. The results show page views, form starts, and form submissions for CRM/TRM training pages during February 2026. For example, on February 25 there were 106 page views from 16 users, but only 6 form starts and 1 form submission, indicating that many users view the page but only a small portion begin or complete the registration form."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-2-filtering-and-scoping-pt.2",
+    "href": "LaCour, Shayah-Milestone 4.html#query-2-filtering-and-scoping-pt.2",
+    "title": "Milestone 4",
+    "section": "Query 2: Filtering and Scoping Pt.2",
+    "text": "Query 2: Filtering and Scoping Pt.2\nWITH base AS (\n  SELECT\n    user_pseudo_id,\n    (SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location') AS page_location\n  FROM `tri-ga4-488603.analytics_477532677.events_*`\n  WHERE _TABLE_SUFFIX BETWEEN '20260215' AND '20260228'   \n),\nconverters AS (\n  SELECT DISTINCT user_pseudo_id\n  FROM base\n  WHERE LOWER(page_location) LIKE '%docs.google%'\n)\nSELECT\n  COUNT(DISTINCT base.user_pseudo_id) AS total_users,\n  COUNT(DISTINCT converters.user_pseudo_id) AS converter_users,\n  COUNT(DISTINCT base.user_pseudo_id) - COUNT(DISTINCT converters.user_pseudo_id) AS non_converter_users\nFROM base\nLEFT JOIN converters USING (user_pseudo_id);\n\n\nWhat query two means:\nThis query segments users into converters and non-converters based on whether they reached a Google Forms confirmation page within the selected 14-day period. It first collects all users who generated events on the TRI website, then identifies converters as users whose page location contains “docs.google,” which serves as a proxy for a completed training registration form. The results show there being 169 total visitors and there being 0 converter users. Meaning all users are non-converters."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-3-grouping-and-aggregation",
+    "href": "LaCour, Shayah-Milestone 4.html#query-3-grouping-and-aggregation",
+    "title": "Milestone 4",
+    "section": "Query 3: Grouping and aggregation",
+    "text": "Query 3: Grouping and aggregation\nSELECT\n  PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n  event_name,\n  COUNT(*) AS events,\n  COUNT(DISTINCT user_pseudo_id) AS users\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'\n  AND event_name IN ('page_view','form_start','form_submit')\n  AND (\n    LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%crm-skills-trainings%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%trm-trainings%'\n  )\nGROUP BY event_dt, event_name\nORDER BY event_dt;\n\n\nWhat query 3 means:\nThis query aggregates training-related user activity by grouping events by date and event type for CRM and TRM training pages. The results show the number of total events and distinct users interacting with these pages within the specified date range. For example, on February 25, there were 72 page view events generated by 9 users on training-related pages. This aggregation helps identify overall engagement with TRI training content and provides insight into how users interact with key pages in the training registration funnel."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-4-grouping-and-aggregation-pt.2",
+    "href": "LaCour, Shayah-Milestone 4.html#query-4-grouping-and-aggregation-pt.2",
+    "title": "Milestone 4",
+    "section": "Query 4: Grouping and aggregation Pt.2",
+    "text": "Query 4: Grouping and aggregation Pt.2\nSELECT\n  (SELECT value.string_value\n   FROM UNNEST(event_params)\n   WHERE key='page_title') AS page_title,\n  COUNT(*) AS total_events,\n  COUNT(DISTINCT user_pseudo_id) AS unique_users\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'\n  AND event_name = 'page_view'\n  AND (\n    LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%training%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%crm%'\n    OR LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%trm%'\n  )\nGROUP BY page_title\nORDER BY total_events DESC\nLIMIT 10;\n\n\nWhat query 4 means:\nThis query groups page view events by page title to identify which training-related pages on the TRI website receive the most engagement. The results show the total number of events and the number of unique users who viewed each page during the selected time period. For example, the “Community Resiliency Model” page generated 167 page view events from 19 unique users, indicating strong user interest in that training content."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-5-unnest-event-parameters",
+    "href": "LaCour, Shayah-Milestone 4.html#query-5-unnest-event-parameters",
+    "title": "Milestone 4",
+    "section": "Query 5: Unnest event parameters",
+    "text": "Query 5: Unnest event parameters\nSELECT\n  (SELECT value.string_value\n   FROM UNNEST(event_params)\n   WHERE key='page_title') AS page_title,\n  COUNT(*) AS events\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'\n  AND LOWER((SELECT value.string_value FROM UNNEST(event_params) WHERE key='page_location'))\n      LIKE '%trm%'\nGROUP BY page_title\nORDER BY events DESC;\n\n\nWhat query 5 means:\nThis query identifies page view activity for pages related to Trauma Resiliency Model (TRM) training by filtering URLs that contain “trm.” The results show that the page titled “TRM Trainings — Trauma Resource Institute” generated 330 events during the selected date range. This indicates that TRM training content receives a notable amount of engagement from users visiting the site."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-6-unnest-event-parameters-pt.-2",
+    "href": "LaCour, Shayah-Milestone 4.html#query-6-unnest-event-parameters-pt.-2",
+    "title": "Milestone 4",
+    "section": "Query 6: Unnest event parameters Pt. 2",
+    "text": "Query 6: Unnest event parameters Pt. 2\nSELECT\n  PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n  event_name,\n  user_pseudo_id,\n  ep_page_location.value.string_value AS page_location,\n  ep_page_title.value.string_value AS page_title\nFROM `tri-ga4-488603.analytics_477532677.events_*`\nLEFT JOIN UNNEST(event_params) AS ep_page_location\n  ON ep_page_location.key = 'page_location'\nLEFT JOIN UNNEST(event_params) AS ep_page_title\n  ON ep_page_title.key = 'page_title'\nWHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'\n  AND event_name = 'page_view'\nLIMIT 50;\n\n\nWhat query 6 means:\nThis query extracts nested parameters from GA4 event data by using UNNEST(event_params) to retrieve the page_location and page_title associated with each event. The results display page view events along with the exact page URL and title that users visited on the TRI website. From the output, we can see multiple page views occurring on February 28, 2026 across different training-related pages. This demonstrates how GA4 stores page information as event parameters and how those parameters must be unnested to analyze specific page interactions."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-7-cte-modular-query-structure",
+    "href": "LaCour, Shayah-Milestone 4.html#query-7-cte-modular-query-structure",
+    "title": "Milestone 4",
+    "section": "Query 7: CTE/ modular query structure",
+    "text": "Query 7: CTE/ modular query structure\nWITH base_events AS (\n  SELECT\n    PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n    event_name,\n    user_pseudo_id,\n    (SELECT value.string_value\n     FROM UNNEST(event_params)\n     WHERE key = 'page_location') AS page_location\n  FROM `tri-ga4-488603.analytics_477532677.events_*`\n  WHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'  -- scoped date range\n    AND event_name IN ('page_view', 'form_start', 'form_submit')\n),\ntraining_events AS (\n  SELECT *\n  FROM base_events\n  WHERE LOWER(page_location) LIKE '%crm-skills-trainings%'\n     OR LOWER(page_location) LIKE '%trm-trainings%'\n     OR LOWER(page_location) LIKE '%find-a-training%'\n)\nSELECT\n  event_dt,\n  COUNTIF(event_name = 'page_view')   AS page_views,\n  COUNTIF(event_name = 'form_start')  AS form_starts,\n  COUNTIF(event_name = 'form_submit') AS form_submits,\n  COUNT(DISTINCT user_pseudo_id)      AS unique_users\nFROM training_events\nGROUP BY event_dt\nORDER BY event_dt;\n\n\nWhat query 7 means:\nThis query uses a CTE to first create a base dataset of training-related events and then summarizes those events into a daily funnel view. The results show how many users viewed training pages, started the registration form, and submitted the form each day. For example, on February 25 there were 126 page views from 17 users, but only 6 form starts and 1 form submission, indicating a drop-off between viewing the training page and completing the form. This modular query structure helps clearly analyze how users progress through the training registration funnel."
+  },
+  {
+    "objectID": "LaCour, Shayah-Milestone 4.html#query-8-joining-or-combining",
+    "href": "LaCour, Shayah-Milestone 4.html#query-8-joining-or-combining",
+    "title": "Milestone 4",
+    "section": "Query 8: Joining or combining",
+    "text": "Query 8: Joining or combining\nWITH base AS (\n  SELECT\n    PARSE_DATE('%Y%m%d', event_date) AS event_dt,\n    event_name,\n    user_pseudo_id,\n    (SELECT value.string_value\n     FROM UNNEST(event_params)\n     WHERE key = 'page_location') AS page_location\n  FROM `tri-ga4-488603.analytics_477532677.events_*`\n  WHERE _TABLE_SUFFIX BETWEEN '20260201' AND '20260228'\n    AND event_name IN ('page_view','form_submit')\n),\ntraining_only AS (\n  SELECT *\n  FROM base\n  WHERE LOWER(page_location) LIKE '%crm-skills-trainings%'\n     OR LOWER(page_location) LIKE '%trm-trainings%'\n     OR LOWER(page_location) LIKE '%find-a-training%'\n),\ndaily_pageviews AS (\n  SELECT\n    event_dt,\n    COUNT(*) AS page_views,\n    COUNT(DISTINCT user_pseudo_id) AS users_viewing\n  FROM training_only\n  WHERE event_name = 'page_view'\n  GROUP BY event_dt\n),\ndaily_submits AS (\n  SELECT\n    event_dt,\n    COUNT(*) AS form_submits,\n    COUNT(DISTINCT user_pseudo_id) AS users_submitting\n  FROM training_only\n  WHERE event_name = 'form_submit'\n  GROUP BY event_dt\n)\nSELECT\n  pv.event_dt,\n  pv.page_views,\n  pv.users_viewing,\n  COALESCE(fs.form_submits, 0) AS form_submits,\n  COALESCE(fs.users_submitting, 0) AS users_submitting,\n  SAFE_DIVIDE(COALESCE(fs.users_submitting, 0), pv.users_viewing) AS submit_rate_users\nFROM daily_pageviews pv\nLEFT JOIN daily_submits fs\n  ON pv.event_dt = fs.event_dt\nORDER BY pv.event_dt;\n\n\nWhat query 8 means:\nThis query combines multiple CTEs and joins daily page view activity with daily form submission activity to analyze the training registration funnel. The results show how many users viewed training pages each day, how many submitted the form, and the resulting submission rate. For example, on February 25 there were 126 page views from 17 users but only 1 form submission, indicating a large drop-off between viewing the page and completing the registration form. Overall, the results suggest that while users are visiting training pages, very few are progressing to the final form submission step."
+  },
+  {
+    "objectID": "Homework.html",
+    "href": "Homework.html",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "Homework.html#quarto",
+    "href": "Homework.html#quarto",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "Quarto enables you to weave together content and executable code into a finished document. To learn more about Quarto see https://quarto.org."
+  },
+  {
+    "objectID": "Homework.html#running-code",
+    "href": "Homework.html#running-code",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Running Code",
+    "text": "Running Code\nWhen you click the Render button a document will be generated that includes both content and the output of embedded code. You can embed code like this:\n\n1 + 1\n\n[1] 2\n\n\nYou can add options to executable code like this\n\n\n[1] 4\n\n\nThe echo: false option disables the printing of code (only output is displayed)."
+  },
+  {
+    "objectID": "Homework.html#query-1",
+    "href": "Homework.html#query-1",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 1",
+    "text": "Query 1\nSELECT event_date, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nLIMIT 20;\n```\nThis query pulls a small sample (20 rows) showing:\n\nevent_date: the date the event happened\nevent_name: the type of event recorded\nThe purpose is to quickly preview what the event data looks like."
+  },
+  {
+    "objectID": "Homework.html#query-2",
+    "href": "Homework.html#query-2",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 2",
+    "text": "Query 2\nSELECT event_date, event_name, user_pseudo_id\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase' LIMIT 50;\n```\nThis query filters the dataset to only include rows where:\n\nevent_name = 'purchase'\n\nIt returns up to 50 purchase events and includes:\n\nuser_pseudo_id: an anonymous user identifier\n\nThis helps confirm purchase events exist and shows which users generated them."
+  },
+  {
+    "objectID": "Homework.html#query-3",
+    "href": "Homework.html#query-3",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 3",
+    "text": "Query 3\nSELECT event_date, event_timestamp, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\nORDER BY event_timestamp DESC\nLIMIT 20;\n```\nThis query:\n\nfilters to purchase events only\nsorts them from newest to oldest using ORDER BY event_timestamp DESC\nreturns the 20 most recent purchase rows\n\nThis is useful when you want the latest activity first."
+  },
+  {
+    "objectID": "Homework.html#query-4",
+    "href": "Homework.html#query-4",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 4",
+    "text": "Query 4\nSELECT COUNT(*) AS event_count\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\n```\nThis query counts how many total event rows exist in the dataset for:\n\nDecember 1, 2020 through December 31, 2020\n\nIt uses _TABLE_SUFFIX to restrict which daily tables are included."
+  },
+  {
+    "objectID": "Homework.html#query-5",
+    "href": "Homework.html#query-5",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 5",
+    "text": "Query 5\nSELECT COUNT(*) AS purchase_events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\n    AND _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\n    ```\nThis query counts only purchase events in December 2020 by:\n\nfiltering event_name = 'purchase'\nrestricting tables to Dec 1–Dec 31 using _TABLE_SUFFIX\nThis gives the total number of purchase rows during that month."
+  },
+  {
+    "objectID": "Homework.html#query-6",
+    "href": "Homework.html#query-6",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 6",
+    "text": "Query 6\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_date\nORDER BY event_date;\n```\nThis query summarizes events by day in December 2020:\n\nGROUP BY event_date creates one row per date\nCOUNT(*) counts the number of event rows for each date\nORDER BY event_date sorts from earliest to latest\n\nThis is a basic time-series count of all activity."
+  },
+  {
+    "objectID": "Homework.html#query-7",
+    "href": "Homework.html#query-7",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 7",
+    "text": "Query 7\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nORDER BY events DESC\nLIMIT 15;\nThis query finds the most frequent event types in December 2020:\n\ngroups by event_name\ncounts how many rows each event type has\nsorts from most common to least common\nlimits to the top 15\nThis is useful for understanding the main behaviors being tracked."
+  },
+  {
+    "objectID": "Homework.html#query-8",
+    "href": "Homework.html#query-8",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 8",
+    "text": "Query 8\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nHAVING COUNT(*) &gt;= 50000\nORDER BY events DESC;\n```\nThis query is like Query 7, but instead of taking the top 15, it:\n\nkeeps only event types with 50,000 or more rows using HAVING COUNT(*) &gt;= 50000"
+  },
+  {
+    "objectID": "Homework.html#query-9",
+    "href": "Homework.html#query-9",
+    "title": "Big Query Lecture 1 HW",
+    "section": "Query 9",
+    "text": "Query 9\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201207'\nGROUP BY event_date\nORDER BY event_date;\n```\nThis query is the same idea as Query 6, but only for the first week of December:\n\nDec 1, 2020 through Dec 7, 2020\none row per day with the total event count\n\nThis is useful when you want a smaller time window to explore trends quickly."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html",
+    "href": "Big Query Lecture 1 HW.html",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nLIMIT 20;\nThis query pulls a small sample (20 rows) showing:\n\nevent_date: the date the event happened\nevent_name: the type of event recorded\nThe purpose is to quickly preview what the event data looks like.\n\n\n\n\n\nSELECT event_date, event_name, user_pseudo_id\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase' LIMIT 50;\nThis query filters the dataset to only include rows where:\n\nevent_name = 'purchase'\n\nIt returns up to 50 purchase events and includes:\n\nuser_pseudo_id: an anonymous user identifier\n\nThis helps confirm purchase events exist and shows which users generated them.\n\n\n\n\nSELECT event_date, event_timestamp, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\nORDER BY event_timestamp DESC\nLIMIT 20;\nThis query:\n\nfilters to purchase events only\nsorts them from newest to oldest using ORDER BY event_timestamp DESC\nreturns the 20 most recent purchase rows\n\nThis is useful when you want the latest activity first.\n\n\n\n\nSELECT COUNT(*) AS event_count\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts how many total event rows exist in the dataset for:\n\nDecember 1, 2020 through December 31, 2020\n\nIt uses _TABLE_SUFFIX to restrict which daily tables are included.\n\n\n\n\nSELECT COUNT(*) AS purchase_events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\n    AND _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts only purchase events in December 2020 by:\n\nfiltering event_name = 'purchase'\nrestricting tables to Dec 1–Dec 31 using _TABLE_SUFFIX\nThis gives the total number of purchase rows during that month.\n\n\n\n\n\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_date\nORDER BY event_date;\nThis query summarizes events by day in December 2020:\n\nGROUP BY event_date creates one row per date\nCOUNT(*) counts the number of event rows for each date\nORDER BY event_date sorts from earliest to latest\n\nThis is a basic time-series count of all activity.\n\n\n\n\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nORDER BY events DESC\nLIMIT 15;\nThis query finds the most frequent event types in December 2020:\n\ngroups by event_name\ncounts how many rows each event type has\nsorts from most common to least common\nlimits to the top 15\nThis is useful for understanding the main behaviors being tracked.\n\n\n\n\n\nSELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nHAVING COUNT(*) &gt;= 50000\nORDER BY events DESC;\nThis query is like Query 7, but instead of taking the top 15, it:\n\nkeeps only event types with 50,000 or more rows using HAVING COUNT(*) &gt;= 50000\n\n\n\n\n\nSELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201207'\nGROUP BY event_date\nORDER BY event_date;\nThis query is the same idea as Query 6, but only for the first week of December:\n\nDec 1, 2020 through Dec 7, 2020\none row per day with the total event count\n\nThis is useful when you want a smaller time window to explore trends quickly."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-1",
+    "href": "Big Query Lecture 1 HW.html#query-1",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nLIMIT 20;\nThis query pulls a small sample (20 rows) showing:\n\nevent_date: the date the event happened\nevent_name: the type of event recorded\nThe purpose is to quickly preview what the event data looks like."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-2",
+    "href": "Big Query Lecture 1 HW.html#query-2",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, event_name, user_pseudo_id\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase' LIMIT 50;\nThis query filters the dataset to only include rows where:\n\nevent_name = 'purchase'\n\nIt returns up to 50 purchase events and includes:\n\nuser_pseudo_id: an anonymous user identifier\n\nThis helps confirm purchase events exist and shows which users generated them."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-3",
+    "href": "Big Query Lecture 1 HW.html#query-3",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, event_timestamp, event_name\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\nORDER BY event_timestamp DESC\nLIMIT 20;\nThis query:\n\nfilters to purchase events only\nsorts them from newest to oldest using ORDER BY event_timestamp DESC\nreturns the 20 most recent purchase rows\n\nThis is useful when you want the latest activity first."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-4",
+    "href": "Big Query Lecture 1 HW.html#query-4",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT COUNT(*) AS event_count\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts how many total event rows exist in the dataset for:\n\nDecember 1, 2020 through December 31, 2020\n\nIt uses _TABLE_SUFFIX to restrict which daily tables are included."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-5",
+    "href": "Big Query Lecture 1 HW.html#query-5",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT COUNT(*) AS purchase_events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE event_name = 'purchase'\n    AND _TABLE_SUFFIX BETWEEN '20201201' AND '20201231';\nThis query counts only purchase events in December 2020 by:\n\nfiltering event_name = 'purchase'\nrestricting tables to Dec 1–Dec 31 using _TABLE_SUFFIX\nThis gives the total number of purchase rows during that month."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-6",
+    "href": "Big Query Lecture 1 HW.html#query-6",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_date\nORDER BY event_date;\nThis query summarizes events by day in December 2020:\n\nGROUP BY event_date creates one row per date\nCOUNT(*) counts the number of event rows for each date\nORDER BY event_date sorts from earliest to latest\n\nThis is a basic time-series count of all activity."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-7",
+    "href": "Big Query Lecture 1 HW.html#query-7",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nORDER BY events DESC\nLIMIT 15;\nThis query finds the most frequent event types in December 2020:\n\ngroups by event_name\ncounts how many rows each event type has\nsorts from most common to least common\nlimits to the top 15\nThis is useful for understanding the main behaviors being tracked."
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-8",
+    "href": "Big Query Lecture 1 HW.html#query-8",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_name, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201231'\nGROUP BY event_name\nHAVING COUNT(*) &gt;= 50000\nORDER BY events DESC;\nThis query is like Query 7, but instead of taking the top 15, it:\n\nkeeps only event types with 50,000 or more rows using HAVING COUNT(*) &gt;= 50000"
+  },
+  {
+    "objectID": "Big Query Lecture 1 HW.html#query-9",
+    "href": "Big Query Lecture 1 HW.html#query-9",
+    "title": "Big Query Lecture 1 HW",
+    "section": "",
+    "text": "SELECT event_date, COUNT(*) AS events\nFROM `bigquery-public-data.ga4_obfuscated_sample_ecommerce.events_*`\nWHERE _TABLE_SUFFIX BETWEEN '20201201' AND '20201207'\nGROUP BY event_date\nORDER BY event_date;\nThis query is the same idea as Query 6, but only for the first week of December:\n\nDec 1, 2020 through Dec 7, 2020\none row per day with the total event count\n\nThis is useful when you want a smaller time window to explore trends quickly."
+  }
+]
