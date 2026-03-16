@@ -1,7 +1,7 @@
 ---
 title: "W06-Reflection Essay-Introduction to Positron"
 author: "Shayah LaCour"
-date: '`r format(Sys.time())`'
+date: '3 March 2026'
 format: 
   html: 
     toc: true
@@ -36,4 +36,4 @@ It’s **helpful**
 
 # Github Education Application
 
-![](images/clipboard-696002325.png)
+![](images/clipboard-3705224945.png)

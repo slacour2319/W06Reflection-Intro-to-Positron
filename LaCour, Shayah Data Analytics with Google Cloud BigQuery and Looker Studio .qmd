@@ -1,0 +1,35 @@
+---
+title: "Data Analytics with Google Cloud BigQuery and Looker Studio"
+author: "Shayah LaCour"
+format: html
+editor: visual
+embed-resources: true
+---
+
+![](images/clipboard-2185661175.png)
+
+# Summary of first lesson - Visualizing BigQuery Data as Line Charts in Looker Studio
+
+This chapter showed how to use BigQuery public datasets and visualize the results in Looker Studio to analyze global temperature trends. The course used the NOAA GSOD dataset, which contains weather observations from thousands of stations around the world dating back to 1929. In BigQuery, the dataset was added to the project and explored using the preview and schema tabs to understand the structure of the data.
+
+Next, SQL queries were used to retrieve and analyze the data. The AVG function calculated the average temperature, and multiple yearly tables were queried using a wildcard. The GROUP BY clause was used to calculate the average temperature for each year, and ORDER BY organized the results chronologically. The query was then saved as a view for reuse.
+
+Finally, the data was connected to Looker Studio to create a line chart. The year field was used as the dimension and average temperature as the metric. After sorting the data and filtering out incomplete data from 2023, the chart showed that global temperatures have generally increased over the past century, rising by about four degrees Fahrenheit.
+
+# Second lesson summary - Dimensions and Column Charts in Looker Studio
+
+First, the instructor explained that the GSOD dataset does not directly contain country information, only station IDs. To solve this, a JOIN operation was used to connect the GSOD observation tables with the stations reference table, which includes a country field. This allowed each temperature record to be associated with a country. Because joins are computationally expensive, the query was limited to data from the 1940s to reduce processing time.
+
+Next, the data was filtered to include only three countries: the UK, the US, and India using a WHERE clause with the IN operator. The query then calculated average temperature using the AVG function, grouped by year and country, and the results were saved as a view. This dataset was connected to Looker Studio to create line charts and column charts, using year as the dimension and temperature as the metric, with country as the breakdown dimension so each country had its own line or column.
+
+To analyze longer trends, string functions in BigQuery were used to create a decade field. The SUBSTR function extracted the first three digits of the year and concatenated "0s" to form labels such as 1920s or 1930s.
+
+For the final challenge, the chart was updated to show temperature trends across decades for the entire 20th century. After refreshing the data source in Looker Studio, the chart’s main dimension was simply changed from year to decade, producing a clearer visualization of how temperatures changed over time in the selected countries.
+
+# Summary from Third Lesson - Geo charts
+
+The videos showed how to create geo charts in Looker Studio using data from BigQuery. First, the instructor prepared the data by writing a SQL query to calculate average temperatures by country and uploading a CSV file containing ISO country codes into BigQuery. The query results were saved and then connected to Looker Studio, where a geo chart was created using country as the location and average temperature as the metric.
+
+For the final challenge, the goal was to show how a country’s temperature in a given year compares to its average temperature over the past 50 years. This required calculating two values in SQL: the average yearly temperature by country and the baseline temperature since 1973. The difference between the two values produced a temperature delta, which showed whether a country was warmer or cooler than its historical average.
+
+The results were saved as a table and visualized using a Field Map in Looker Studio. Colors were adjusted so red/orange represented warmer temperatures and blue represented cooler temperatures. A date range control allowed users to compare different time periods, making the map interactive and useful for exploring temperature changes over time.
